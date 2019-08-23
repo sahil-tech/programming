@@ -9,7 +9,7 @@ var binarySearch = (array , x , start , end) =>{
          return binarySearch(array , x , start , end);
      }
      else{
-         end=mid-1;
+         end=mid-1;;;;;
          return binarySearch(array , x , start , end);
 
      }
@@ -20,9 +20,10 @@ var insertionSort = () =>{
     const input = require('readline-sync');
     console.log("insertion sort begins");
     var array1  = [];
-    var n1 = input.questionInt("enter array length : ");
+    var n1 = input.questionInt("enter array length");
+    console.log("enter elemenmts");
     for(let i=0;i<n1;i++){
-        array1[i] = input.question("enter " + (i+1) + " element : ");
+        array1[i] = input.question("enter " + i + " element");
         for(let j=0;j<i;j++){
            if(array1[i] < array1[j]){
                var a =array1[i];
