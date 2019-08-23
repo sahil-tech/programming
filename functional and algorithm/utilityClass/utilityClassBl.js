@@ -9,7 +9,7 @@ var binarySearch = (array , x , start , end) =>{
          return binarySearch(array , x , start , end);
      }
      else{
-         end=mid-1;
+         end=mid-1;;;;;
          return binarySearch(array , x , start , end);
 
      }
