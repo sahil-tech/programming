@@ -18,19 +18,22 @@ var binarySearchInt = (array , x , start , end) =>{
 }
 var binarySearchString = (array , x , start , end) =>{
     array.sort();
-    var mid = Math.floor((start+end)/2);
-     if(x == array[mid]){
-         return  x + " : is our required element ";
-     }
-     if(x > array[mid]){
-         start = mid+1;
-         return binarySearchString(array , x , start , end);
-     }
-     else{
-         end=mid-1;
-         return binarySearchString(array , x , start , end);
+    while(start <= end){
+        var mid = Math.floor((start+end)/2);
+        if(x == array[mid]){
+              return  x + " : is our required element ";
+        }
+        if(x > array[mid]){
+              start = mid+1;
+              return binarySearchString(array , x , start , end);
+        }
+        else{
+              end=mid-1;
+              return binarySearchString(array , x , start , end);
 
-     }
+        }
+    }
+    console.log("element not found");
 
 
 }
@@ -99,7 +102,7 @@ var bubbleSortInt = (n2 , array2) =>{
     }
 
     
-    var bubbleSortString = (n2 , array2) =>{
+var bubbleSortString = (n2 , array2) =>{
         var swap = 1;
         while(swap>0){
             swap = 0;
@@ -117,27 +120,7 @@ var bubbleSortInt = (n2 , array2) =>{
         console.log(array2); 
         }
 
-    
-var mergSort = (array) =>{
-    var n = array.length;
-    if(n>1){
-    var mid = n/2;
-    var left = [];
-    var right = [];
-    for(let i=0;i<mid;i++){
-        left[i] = array[i];
-    }
-    
-    for(let i=mid;i<n;i++){
-        right[i-mid] = array[i];
-    }
-
-    mergSort(left);
-    mergSort(right);
-    merg(left , right );
-}
-}
-var merg = (left , right  ) => {
+var merg = (left , right ) => {
     var nl = left.length;
     var nr = right.length;
     var result = [];
@@ -145,17 +128,16 @@ var merg = (left , right  ) => {
     var j = 0;
     var k = 0;
     while(i < nl && j < nr){
-        if(left[i]<=right[j]){
+        if(left[i] < right[j]){
             result[k] = left[i];
-            i= i+1;
-            
-        }
+            i = i+1;
+            k = k+1;
+            }
         else{
-            result[k] = right[j];
-            j = j+1;
-             
-        }
-        k = k+1;
+            result[k] = right[j]
+            j = j+1; 
+            k = k+1;       
+            }
         
     }
     while(i<nl){
@@ -169,7 +151,24 @@ var merg = (left , right  ) => {
         k = k+1;
     }
     console.log(result);
-    
+            
 }
+
+var mergSort = (array) =>{
+    var n = array.length;
+    if(n<2){
+        return array;
+    }
+    var mid = Math.floor(n/2);
+    var left = [];
+    var right = [];
+    left = array.slice(0, mid);
+    right = array.slice(mid);
+    mergSort(left);
+    mergSort(right);
+    merg(left , right);
+
+}
+
     
 module.exports = {binarySearchInt , insertionSortInt ,  bubbleSortInt , binarySearchString , insertionSortString ,  bubbleSortString ,  mergSort , merg}
