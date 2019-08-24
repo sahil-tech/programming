@@ -118,57 +118,57 @@ var bubbleSortString = (n2 , array2) =>{
             }
         }
         console.log(array2); 
-        }
-
-var merg = (left , right ) => {
-    var nl = left.length;
-    var nr = right.length;
-    var result = [];
-    var i = 0;
-    var j = 0;
-    var k = 0;
-    while(i < nl && j < nr){
-        if(left[i] < right[j]){
-            result[k] = left[i];
-            i = i+1;
-            k = k+1;
-            }
-        else{
-            result[k] = right[j]
-            j = j+1; 
-            k = k+1;       
-            }
-        
-    }
-    while(i<nl){
-        result[k] = left[i];
-        i = i+1;
-        k = k+1;
-    }
-    while(j<nr){
-        result[k] = right[j];
-        j = j+1;
-        k = k+1;
-    }
-    console.log(result);
-            
 }
 
-var mergSort = (array) =>{
-    var n = array.length;
+var mergeSort=(test)=>{
+
+
+    var n=test.length;
     if(n<2){
-        return array;
+        return;
     }
-    var mid = Math.floor(n/2);
-    var left = [];
-    var right = [];
-    left = array.slice(0, mid);
-    right = array.slice(mid);
-    mergSort(left);
-    mergSort(right);
-    merg(left , right);
-
+    var mid=n/2;
+    var left=[];
+    var right=[];
+    for(var i=0;i<mid;i++){
+        left[i]=test[i];
+    }
+    for(var i=mid;i<n;i++){
+        right[i-mid]=test[i]; // to start from 0
+    }
+    
+    mergeSort(left);
+    mergeSort(right);
+    merge(left,right,test);
 }
 
-    
-module.exports = {binarySearchInt , insertionSortInt ,  bubbleSortInt , binarySearchString , insertionSortString ,  bubbleSortString ,  mergSort , merg}
+var merge=(left,right,test)=>{
+    var nl=left.length;
+    var rl=right.length;
+    var i=0;
+    var j=0;
+    var k=0;
+   while(i<nl&&j<rl){
+       if(left[i]>right[j]){
+           test[k]=right[j];
+           j++;
+       }
+       else{
+           test[k]=left[i];
+           i++;
+       }
+        k++;
+   }
+   while(i<nl){
+       test[k]=left[i];
+       i++;
+       k++;
+   }
+   while(j<rl){
+       test[k]=right[j];
+       j++;
+       k++;
+   }
+   console.log(test);
+}  
+module.exports = {binarySearchInt , insertionSortInt ,  bubbleSortInt , binarySearchString , insertionSortString ,  bubbleSortString ,  mergeSort , merge}
