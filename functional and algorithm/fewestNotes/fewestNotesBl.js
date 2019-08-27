@@ -44,10 +44,7 @@ try{
      while(money>0){
          
          notes.push(maxCurrency(money));
-         money = money - maxCurrency(money);
-
-         
-         
+         money = money - maxCurrency(money);    
      }
      console.log(notes.length + " notes required");
      console.log(notes)

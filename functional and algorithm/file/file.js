@@ -16,7 +16,8 @@ const fs = require('fs');
     var x = input.question("enter the element you want to find");
     var end = array.length;
     console.log(fileObject.binarySearchString(array , x , start , end));
-}
+
 )
+}
 
 
