@@ -11,6 +11,7 @@ for(let i=0;i<(arr.length-1);i++){
     ol.add(parseInt(arr[i]));
 }
 ol.sort();
+ol.printList();
 var x = input.questionInt("enter the element you want to find");
 console.log(ol.find(x));
 ol.sort();

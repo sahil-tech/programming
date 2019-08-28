@@ -13,9 +13,7 @@ for(let i=0;i<n;i++){
     if(x == "w"){
         q2.enqueue(name);
     }
-    if(x == "e"){
-        return;
-    }
+
 }
     
 
