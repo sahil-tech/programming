@@ -1,0 +1,5 @@
+{
+    "inventory_details":[{"product_name":"Rice","weight_in_kg":"100","price_per_kg":10},
+        {"product_name":"Wheat","weight_in_kg":"200","price_per_kg":20},
+        {"product_name":"Pulse","weight_in_kg":"300","price_per_kg":30}] 
+}
