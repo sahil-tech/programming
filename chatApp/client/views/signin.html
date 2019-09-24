@@ -1,0 +1,24 @@
+<div class="container" ng-controller="MyCtrl as ctrl">
+    <div class="center">
+
+        <div>
+            <p style="font-size: xx-large;" text-align="center">
+                Sign-In
+            </p>
+            <p><input type="text" ng-model="ctrl.email" placeholder="email"></input></p>
+            <p><input type="password" ng-model="ctrl.password" placeholder="Password"></input></p>
+            <p text-align="center">
+                <button ng-click="ctrl.userLogin(ctrl.email,ctrl.password)">Log In</button>
+                <span></span>
+                <button ng-click="ctrl.forgotPassword(ctrl.email)">forgot password</button>
+                
+            </p>
+            <p>{{ctrl.email}}</p>
+            <p>{{ctrl.password}}</p>
+            <p>{{ctrl.outputL}}</p>
+            <p>{{ctrl.outputF}}</p>
+            
+
+        </div>
+    </div>
+</div>

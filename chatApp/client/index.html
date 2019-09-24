@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <!-- <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-2.4.0.min.css" /> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.min.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body ng-controller="MyCtrl as ctrl">
+    <button ng-click="ctrl.clickLogin()">login</button>
+    <button ng-click="ctrl.clickSignup()">register</button>
+    <button ng-click="ctrl.clickresetPassword()">reset Password</button>
+    
+    <div ng-view></div>
+
+</body>
+
+</html>
