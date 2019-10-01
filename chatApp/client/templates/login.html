@@ -1,0 +1,66 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .bg {
+           
+            background-image: url("kak.jpg");
+          
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .bg-text {
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/opacity/see-through */
+            color: white;
+            font-weight: bold;
+            border: 3px solid #f1f1f1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 80%;
+            padding: 20px;
+
+        }
+    </style>
+    </head>  
+
+    <div class="bg"></div>
+    
+    <div class="bg-text">
+
+        <p style="font-size: xx-large;" text-align="center">
+            Sign-In
+        </p>
+        <p><input type="email" ng-model="ctrl.email" placeholder="Enter the email"></input></p>
+        <p><input type="password" ng-model="ctrl.password" placeholder="Enter the Password"></input></p>
+        <p text-align="center">
+            <button id="button1" ng-click="ctrl.signin(ctrl.email,ctrl.password)">Log In</button>
+            <span></span>
+            <button id="button1" ng-click="ctrl.clickforgotPassword()">Forgot Password</button>
+
+        </p>
+        <!-- <p>{{ctrl.email}}</p> -->
+        <!-- <p>{{ctrl.password}}</p> -->
+        <p>{{ctrl.outputL}}</p>
+        <p>{{ctrl.outputF}}</p>
+
+
+    </div>
+    

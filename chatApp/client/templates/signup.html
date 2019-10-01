@@ -1,0 +1,63 @@
+
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+        body, html {
+          height: 100%;
+          margin: 0;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        * {
+  box-sizing: border-box;
+}
+        .bg {
+          /* The image used */
+          background-image: url("kak.jpg");
+/*         
+          filter: blur(8px);
+         -webkit-filter: blur(8px); */
+          /* Full height */
+          height: 100%; 
+        
+          /* Center and scale the image nicely */
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+        .bg-text {
+     background-color: rgb(0,0,0); /* Fallback color */
+     background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+     color: white;
+     font-weight: bold;
+     border: 3px solid #f1f1f1;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+      transform: translate(-50%, -50%);
+     z-index: 2;
+     width: 80%;
+     padding: 25px;
+
+}
+        </style>
+        </head>  
+
+        <div class="bg"></div>
+        
+        <div class="bg-text">
+         
+        <p style="font-size: xx-large; color:white" text-align="center"></p>
+        </p>
+        <h1>Sign-up to chatApp</h1>
+        <p><input type="text" ng-model="ctrl.name" placeholder="Enter the name"></input></p>
+        <p><input type="text" ng-model="ctrl.email" placeholder="Enter the e-mail"></input></p>
+        <p><input type="password" ng-model="ctrl.password" placeholder="Enter the Password"></input></p>
+        <p><input type="password" ng-model="ctrl.confirmPassword" placeholder="Confirm Password"></input></p>
+        <div class="p-notification--negative" ng-show="ctrl.password!=ctrl.confirmPassword">
+            <p class="p-notification__response">
+                <span class="p-notification__status">Password you entered don't match
+            </p>
+            </div>
+        <p text-align="center"><button id="button1" ng-click="ctrl.register(ctrl.name,ctrl.email,ctrl.password)">Register</button></p>
+        <p>{{ctrl.output}}</p>
+        </div>

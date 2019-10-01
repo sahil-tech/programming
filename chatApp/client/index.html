@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<html ng-app="myApp">
 
-<head>
-    <!-- <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-2.4.0.min.css" /> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.min.js"></script>
-    <script src="app.js"></script>
-</head>
+<!DOCTYPE html >
+<html ng-app="HS-chatApp">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script src="app.js"></script>
+<script src="controller/userController.js"></script>
+<script src="services/userServices.js"></script>
 
-<body ng-controller="MyCtrl as ctrl">
-    <button ng-click="ctrl.clickLogin()">login</button>
-    <button ng-click="ctrl.clickSignup()">register</button>
-    <button ng-click="ctrl.clickresetPassword()">reset Password</button>
-    
+<link rel="stylesheet" href="css/design.css">
+
+<body ng-controller="MyCtrl as ctrl" class="bg">
     <div ng-view></div>
 
 </body>
 
 </html>
+

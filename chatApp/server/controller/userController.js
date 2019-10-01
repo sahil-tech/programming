@@ -1,12 +1,12 @@
 /**
- * @description : Input-Output Validation is Done here
+ * @description : Input-Output Validation 
  */
 
-const userServices = require('../services/userServices')
+const userServices = require('../Services/userServices')
 
 
 /**
- * @description : Get data of all users
+ * @description : Geting data of all users
  * @param {req} : Request Body
  * @param {res} : Response
  */
@@ -16,15 +16,14 @@ exports.getAllData = (req, res) => {
 
     userServices.getAllData((err, data) => {
         if (err) {
-            response.status = false;
+            response.state = false;
             response.error = err;
 
             res.status(404).send(response);
         } else {
             response.status = true;
             response.data = data;
-
-            res.status(200).send(response);
+            res.status(200).send(response)
         }
     });
 
@@ -32,7 +31,7 @@ exports.getAllData = (req, res) => {
 }
 
 /**
- * @description : Add a new User
+ * @description : Adding new User
  * @param {req} : Request Body
  * @param {res} : Response
  */
@@ -47,20 +46,20 @@ exports.addUser = (req, res) => {
         if (err.isEmpty()) {
             userServices.addUser(req.body, (err, data) => {
                 if (err) {
-                    response.status = false;
+                    response.state = false;
                     response.error = err; //Any error in saving
                     res.status(422).send(response);
                 }
                 else {
-                    response.status = true;
+                    response.state = true;
                     response.data = data;
 
                     res.status(200).send(response);
                 }
             });
         } else {
-            response.status = false;
-            response.error = "Invalid Details Entered"; // Any error in adding new User
+            response.state = false;
+            response.error = err; // Any error in adding new User
             res.status(500).send(response);
         }
     });
@@ -81,20 +80,16 @@ exports.logIn = (req, res) => {
         if (err.isEmpty()) {
             userServices.logIn(req.body, (err, data) => {
                 if (!err) {
-                    response.status = true;
+                    //response.state = true;
                     response.data = data;
 
-                    res.status(200).send(response);
+                    res.status(200).send(data);
                 } else {
-                    response.status = false;
+                    response.state = false;
                     response.error = err;
                     res.status(500).send(response);
                 }
             });
-        } else {
-            response.status = false;
-            response.error = "Invalid Email or Password";
-            res.status(422).send(response);
         }
     });
 }
@@ -119,12 +114,12 @@ exports.resetPassword = (req, res) => {
         if (err.isEmpty()) {
             userServices.resetPassword(req, (err, data) => {
                 if (!err) {
-                    response.status = true;
+                    response.state = true;
                     response.data = data;
 
                     res.status(200).send(response);
                 } else {
-                    response.status = false;
+                    response.state = false;
                     response.error = err;
                     res.status(422).send(response);
                 }
@@ -135,7 +130,7 @@ exports.resetPassword = (req, res) => {
 }
 
 /**
- * @description : send a mail if password forgotten
+ * @description : sending a mail if password forgotten
  * @param {req} : Request Body
  * @param {res} : Response
  */
@@ -143,28 +138,64 @@ exports.forgotPassword = (req, res) => {
     var response = {}
 
     req.checkBody('email', 'Invalid Email Address').isEmail();
-    
     req.getValidationResult().then((err) => {
         if (err.isEmpty()) {
             userServices.forgotPassword(req.body, (err, data) => {
                 if (!err) {
-                    if (data) {
-                        response.status = true;
-                        response.data = data;
+                    response.state = true;
+                    response.data = data;
 
-                        res.status(200).send(response);
-                    }
+                    res.status(200).send(response);
                 } else {
-                    console.log(err);
-                    response.status = false;
+                    response.state = false;
                     response.error = err;
                     res.status(404).send(response);
                 }
             })
         } else {
+            response.state = false;
+            response.error = err;
+            res.status(500).send(response);
+        }
+    });
+}
+
+exports.chatConversation = (chatData,callback) => {
+
+    var response={};
+    userServices.chatConversation(chatData, (err, data) => {
+        if (err) {
+            response.error = "Some error occured ";
             response.status = false;
-            response.error = "Invalid Email Id Entered";
-            res.status(422).send(response);
+            //res.send(response);
+            callback(response)
+        }
+        else {
+            response.message = data;
+            response.status = true;
+            //res.send(response);
+            // return response;
+            callback(null,response)
+        }
+
+    })
+}
+
+exports.fetchConversation=(req,res)=>{
+    var response={}
+    userServices.fetchConversation(req.body,(err,data)=>{
+        if (err) {
+            response.error = [{message:err}];
+            response.status = false;
+            //res.send(response);
+            res.status(404).send(response);
+        }
+        else {
+            response.message = data;
+            response.status = true;
+            //res.send(response);
+            // return response;
+            res.status(200).send(response);
         }
     });
 }

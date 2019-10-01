@@ -1,0 +1,56 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .bg {
+            /* The image used */
+            background-image: url("kak.jpg");
+            /*        
+                 filter: blur(8px);
+                -webkit-filter: blur(8px); */
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+      
+    </style>
+</head>
+
+<div class="bg"></div>
+
+<div class="bg-text">
+
+    <h1 id="center">Welcome To HS-Chat App {{sender}}</h1>
+    <button id="button"  ng-click="ctrl.clickresetPassword() " >Reset Password</button>  <span> <button class="new"  ng-click="ctrl.logout() " >Logout</button> </span>
+<h3>CONTACT DETAILS</h3>
+<div>
+    <div class="contacts">
+        <ul ng-repeat="email in ctrl.details" type="none">
+            <button ng-click="ctrl.chatHistory(email)">{{email}}</button>
+        </ul>
+    </div>
+    <div class="messageArea" ng-if="ctrl.flag">
+        <div class="chatHistory" id="chatWindow">
+            <ul class="messages" ng-repeat="msg in ctrl.messagesPacket track by $index" type="none">
+                <li ng-if="ctrl.alignMessageRight(msg.sender)" ng-class="{'alignRight':ctrl.alignMessageRight(msg.sender)}">{{msg.message}}</li>
+                <li ng-if="!ctrl.alignMessageRight(msg.sender)" ng-class="{'alignLeft':ctrl.alignMessageLeft(msg.sender)}">{{msg.message}}</li>
+            </ul>
+            <!-- <div id="alignLeft" ng-class="{'alignRight':ctrl.alignMessageRight(msg.sender)}">{{ctrl.newMessage}}</div> -->
+        </div>
+        <textarea rows="2" cols="70" type="text" ng-model="ctrl.textArea" placeholder="Enter messages here "></textarea>
+        <button class="new" ng-click="ctrl.send(ctrl.textArea)">send</button>
+    </div>
+</div>
+
+</div>

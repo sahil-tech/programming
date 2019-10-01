@@ -1,14 +1,17 @@
- /**
- * @description : Server
- * @author : Vaibhav Pratihar
- * @since : 08/20/19
+/**
+ * @description : Server(Backend)
+ * @author : Harshit Sethi
+ * @since : 09/18/19
  */
 
 const express = require("express");
+var cors = require('cors');
+var socket = require('socket.io');
 const userRoute = require("../server/routes/routes")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
 const validator = require("express-validator")
+const userController=require('../server/controller/userController');
 require("dotenv").config();
 
 //Start the server
@@ -17,12 +20,12 @@ app = express();
 //BodyParser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+ 
 //Use express Validator
 app.use(validator());
 
 //Connect to Database
-mongoose.connect(process.env.DBPATH,
+mongoose.connect(process.env.DataBase_Connection,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -49,25 +52,40 @@ mongoose.connection.on('error', (err) => {
 });
 
 
-// //To access data on client side
-// app.use((req,res,next)=>{
-//     res.header('Access-Control-Allow-Origin','*');
-//     res.header('Access-Control-Allow-Headers','*');      //Instead of * request may be Origin,Content-Type etc. 
-
-//     if(req.method==='OPTIONS'){
-//         res.header('Access-Control-Allow-Methods','PUT, POST, PATCH, DELETE, GET');
-//         return res.status(200).json({});
-//     }
-//     next();
-// })
+app.use(cors());
+//Home Page
+// app.get("/", (req, res) => {
+//     res.send("Welcome to Home-Page");
+// });
 
 //Route for adding a new User
 app.use("/users", userRoute);
 
 //Start the server
 const port = process.env.PORT || 3000;
-app.listen(port);
+var server=app.listen(port);
 console.log("listening on 3000")
 
+const io=socket(server);
+//loads index.html file at client side 
+app.use(express.static('../client'));
 
-// app.use(express.static("../client"));
+//socket connection 
+io.on('connection', function(socket){
+    console.log("connected to socket")
+    //if socket is disconnected 
+    socket.on('disconnect', function() {
+        console.log("disconnected")
+        });
+        //when user emits a sending event takes data and stores message in database with sender details
+        socket.on('sending', function(data) { 
+           userController.chatConversation(data,(err,response)=>{
+               if(response.status){
+                   //emits after data is being stored successfully in db
+                  io.sockets.emit("receiving",data.message);      
+               }
+           })
+        });
+});
+
+

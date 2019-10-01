@@ -1,14 +1,14 @@
 const router = require("express").Router();
 const userController = require("../controller/userController")
-const tokenFactory = require("../middleware/token")
+const tokenFactory = require("../Middleware/token")
 
-//Users HomePage - Display all users
-router.get("/",userController.getAllData);
+//Users HomePage
+router.get("/getAllData",userController.getAllData);
 
-//Add a new User
+//Adding a new User
 router.post("/addUser",userController.addUser);
 
-//logIn with email and password
+//login with email and password
 router.post("/login",userController.logIn);
 
 //reset password
@@ -16,5 +16,8 @@ router.post("/resetPassword",tokenFactory.verifyToken,userController.resetPasswo
 
 //forgot Password
 router.post("/forgotPassword",userController.forgotPassword);
+
+//fetches conversation between sender and receiver 
+router.post('/fetchConversation',userController.fetchConversation);
 
 module.exports = router;
